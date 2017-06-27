@@ -45,7 +45,6 @@ public class RecommendFragment extends Fragment {
         if (getArguments() != null) {
             this.mUserId = getArguments().getString(ARG_USER_ID);
         }
-        Log.e(TAG, "onCreate: Success");
     }
 
 

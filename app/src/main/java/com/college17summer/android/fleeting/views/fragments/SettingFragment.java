@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.college17summer.android.fleeting.R;
 
@@ -18,6 +19,9 @@ import com.college17summer.android.fleeting.R;
 public class SettingFragment extends Fragment {
     private static final String ARG_USER_ID = "mUserId";
     private String mUserId;
+    private TextView historyView;
+    private TextView collectionsView;
+    private TextView categoryView;
 
 
 
