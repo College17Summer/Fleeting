@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         super.onCreate(savedInstanceState);
         Fresco.initialize(this);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
         ButterKnife.bind(this);
         init();
     }
