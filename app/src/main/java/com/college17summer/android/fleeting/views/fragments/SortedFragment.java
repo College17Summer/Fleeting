@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 
 import com.college17summer.android.fleeting.R;
 import com.college17summer.android.fleeting.adapters.SortedTabsAdapter;
+import com.college17summer.android.fleeting.adapters.VideoListAdapter;
+import com.college17summer.android.fleeting.models.SortedVideoLabEntity;
+import com.college17summer.android.fleeting.models.VideoEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,7 @@ import java.util.List;
 
 public class SortedFragment extends Fragment {
     private static final String ARG_KIND = "mKind";
+    private String mKind;
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private static List<SortedVideosFragment> sortedVideosFragments = new ArrayList<SortedVideosFragment>(3);
@@ -29,7 +33,6 @@ public class SortedFragment extends Fragment {
     //private RecyclerView recyclerView;
     private SortedTabsAdapter tabsAdapter;
 
-    private String mKind;
 
 
     public SortedFragment() {
@@ -46,12 +49,11 @@ public class SortedFragment extends Fragment {
         return fragment;
     }
 
-    // Video Type
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mKind = getArguments().getString(ARG_KIND);
+            this.mKind = getArguments().getString(ARG_KIND);
         }
     }
 

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.view.ViewGroup;
 import com.college17summer.android.fleeting.R;
 import com.college17summer.android.fleeting.adapters.VideoListAdapter;
 import com.college17summer.android.fleeting.models.VideoEntity;
-import com.college17summer.android.fleeting.models.VideoLabEntity;
+import com.college17summer.android.fleeting.models.RecommendVideoLabEntity;
 
 import java.util.List;
 
@@ -63,7 +62,7 @@ public class RecommendFragment extends Fragment {
     }
 
     private void updateUI() {
-        List<VideoEntity> videoEntityList = VideoLabEntity.get(getActivity()).getVideos();
+        List<VideoEntity> videoEntityList = RecommendVideoLabEntity.get(getActivity()).getVideos();
         adapter = new VideoListAdapter(getContext(), videoEntityList);
         recyclerView.setAdapter(adapter);
     }
