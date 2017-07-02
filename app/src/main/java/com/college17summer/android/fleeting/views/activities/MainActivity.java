@@ -49,16 +49,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 .setFirstSelectedPosition(0)
                 .initialise();
         bottomNav.setTabSelectedListener(this);
-        Log.e(TAG, "init: Success");
-
         setDefaultFragment();
     }
 
     private void setDefaultFragment() {
         FragmentManager fm = this.getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        recommendFragment = RecommendFragment.newInstance("user1");
-        transaction.add(R.id.frame_main_window, recommendFragment);
+        if (this.recommendFragment == null) {
+            this.recommendFragment = RecommendFragment.newInstance("userId");
+        }
+        transaction.replace(R.id.frame_main_window, recommendFragment);
+        Log.e(TAG, "Recommend Fragment: Success");
         transaction.commit();
     }
 
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         switch (position) {
             case 0:
                 if (this.recommendFragment == null) {
-                    this.recommendFragment = RecommendFragment.newInstance("user1");
+                    this.recommendFragment = RecommendFragment.newInstance("userId");
                 }
                 transaction.replace(R.id.frame_main_window, recommendFragment);
                 Log.e(TAG, "Recommend Fragment: Success");
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
             case 1:
                 // TODO: Add sorted videos window
                 if (this.sortedFragment == null) {
-                    this.sortedFragment = SortedFragment.newInstance("kind1");
+                    this.sortedFragment = SortedFragment.newInstance("anime");
                 }
                 transaction.replace(R.id.frame_main_window, sortedFragment);
                 break;
