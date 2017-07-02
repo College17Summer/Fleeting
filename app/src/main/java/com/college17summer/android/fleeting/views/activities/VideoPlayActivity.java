@@ -21,7 +21,7 @@ import io.vov.vitamio.widget.VideoView;
 public class VideoPlayActivity extends AppCompatActivity implements MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener {
     private final String TAG = "VideoPlayActivity";
 
-    private String path = "http://www.modrails.com/videos/passenger_nginx.mov";
+    private String path;
     private Uri uri;
     private ProgressBar pb;
     private TextView downloadRateView, loadRateView;
@@ -31,6 +31,8 @@ public class VideoPlayActivity extends AppCompatActivity implements MediaPlayer.
     protected void onCreate(Bundle savedInstanceState) {
 
         Log.e(TAG, "onCreate: Video play");
+
+        this.path = getIntent().getStringExtra("videoUrl");
 
         super.onCreate(savedInstanceState);
         //定义全屏参数
@@ -54,7 +56,7 @@ public class VideoPlayActivity extends AppCompatActivity implements MediaPlayer.
     private void initView() {
         mVideoView = (VideoView) findViewById(R.id.buffer);
         mCustomMediaController=new CustomMediaController(this,mVideoView,this);
-        mCustomMediaController.setVideoName("白火锅 x 红火锅");
+        mCustomMediaController.setVideoName("test");
         pb = (ProgressBar) findViewById(R.id.probar);
         downloadRateView = (TextView) findViewById(R.id.download_rate);
         loadRateView = (TextView) findViewById(R.id.load_rate);

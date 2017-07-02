@@ -37,13 +37,14 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoHolder> {
 
     @Override
     public void onBindViewHolder(VideoHolder holder, int position) {
-        VideoEntity videoEntity = videoEntityList.get(position);
-        holder.mVideoCover.setImageURI("http://img.wdjimg.com/image/video/cfc2ffd94f4c2234ff9f77eb99205791_0_0.jpeg");
-        holder.mVideoTitle.setText("No." + position);
+        final VideoEntity videoEntity = videoEntityList.get(position);
+        holder.mVideoCover.setImageURI(videoEntity.getmVideoCover());
+        holder.mVideoTitle.setText(videoEntity.getmVideoTitle());
         holder.mVideoPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext.getApplicationContext(), VideoPlayActivity.class);
+                intent.putExtra("videoUrl", videoEntity.getmVideoUrl());
                 mContext.startActivity(intent);
             }
         });

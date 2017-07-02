@@ -4,14 +4,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.college17summer.android.fleeting.R;
 import com.college17summer.android.fleeting.adapters.VideoListAdapter;
+import com.college17summer.android.fleeting.models.SortedVideoLabEntity;
 import com.college17summer.android.fleeting.models.VideoEntity;
-import com.college17summer.android.fleeting.models.VideoLabEntity;
+import com.college17summer.android.fleeting.models.RecommendVideoLabEntity;
 
 import java.util.List;
 
@@ -21,6 +23,8 @@ import java.util.List;
 
 public class SortedVideosFragment extends Fragment {
     private static final String ARG_KIND = "mKind";
+    private static final String TAG = "SortedVideos";
+    private String mKind;
     private RecyclerView recyclerView;
     private VideoListAdapter adapter;
 
@@ -30,6 +34,17 @@ public class SortedVideosFragment extends Fragment {
         args.putString(ARG_KIND, mKind);
         fragment.setArguments(args);
         return fragment;
+    }
+
+
+    // Video Type
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            this.mKind = getArguments().getString(ARG_KIND);
+            Log.e(TAG, "onCreate: Video type: " + this.mKind);
+        }
     }
 
 
@@ -48,7 +63,7 @@ public class SortedVideosFragment extends Fragment {
 
     // TODO: Implement concrete functions
     private void updateUI() {
-        List<VideoEntity> videoEntityList = VideoLabEntity.get(getActivity()).getVideos();
+        List<VideoEntity> videoEntityList = SortedVideoLabEntity.get(getActivity()).getVideoList(this.mKind).getVideos();
         adapter = new VideoListAdapter(getContext(), videoEntityList);
         recyclerView.setAdapter(adapter);
     }
