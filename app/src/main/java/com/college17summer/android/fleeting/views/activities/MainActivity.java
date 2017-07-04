@@ -2,6 +2,7 @@ package com.college17summer.android.fleeting.views.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +18,11 @@ import com.college17summer.android.fleeting.views.fragments.SortedVideosFragment
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 
+import java.util.List;
+
 import butterknife.ButterKnife;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener {
 
@@ -104,5 +109,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     public void onTabReselected(int position) {
 
     }
+
 }
 

@@ -1,5 +1,7 @@
 package com.college17summer.android.fleeting.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 /**
@@ -8,10 +10,15 @@ import java.util.Date;
 
 public class HistoryEntity {
 
+    @SerializedName("id")
     private int mId;
+    @SerializedName("user_id")
     private int mUserId;
+    @SerializedName("video_id")
     private int mVideoId;
+    @SerializedName("time")
     private Date time;
+    @SerializedName("process")
     private int process;
 
     public HistoryEntity() {

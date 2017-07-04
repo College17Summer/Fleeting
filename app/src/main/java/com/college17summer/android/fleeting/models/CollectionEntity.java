@@ -1,5 +1,7 @@
 package com.college17summer.android.fleeting.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 /**
@@ -8,9 +10,13 @@ import java.util.Date;
 
 public class CollectionEntity {
 
+    @SerializedName("id")
     private long mId;
+    @SerializedName("user_id")
     private long mUserId;
+    @SerializedName("video_id")
     private long mVideoId;
+    @SerializedName("time")
     private Date mTime;
 
     public CollectionEntity() {

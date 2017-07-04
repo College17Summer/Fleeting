@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.college17summer.android.fleeting.R;
 import com.college17summer.android.fleeting.models.CommentEntity;
@@ -37,7 +39,6 @@ public class CommentActivity extends AppCompatActivity {
         for (int i = 0; i < 100; i++)
         {
             CommentEntity a = new CommentEntity();
-            a.setmContent("Comment Content" + i);
             lists.add(a);
         }
 
@@ -49,8 +50,18 @@ public class CommentActivity extends AppCompatActivity {
 
     public class CommentHolder extends RecyclerView.ViewHolder {
 
+        public ImageView lvCommentCover;
+        public TextView tvCommentUser;
+        public TextView tvCommentAimto;
+        public TextView tvCommentContent;
+
         public CommentHolder(View itemView) {
             super(itemView);
+
+            lvCommentCover = (ImageView)itemView.findViewById(R.id.lv_comment_cover);
+            tvCommentUser = (TextView)itemView.findViewById(R.id.tv_comment_user);
+            tvCommentAimto = (TextView)itemView.findViewById(R.id.tv_comment_aimto);
+            tvCommentContent = (TextView)itemView.findViewById(R.id.tv_comment_content);
         }
     }
 
@@ -72,7 +83,12 @@ public class CommentActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(CommentHolder holder, int position) {
-
+            String str = holder.tvCommentAimto.getText().toString();
+            if(str.equals("null") && (position%2 == 1)) {
+                holder.tvCommentAimto.setVisibility(View.GONE);
+            } else {
+                holder.tvCommentAimto.setText("@No." + position);
+            }
         }
 
         @Override
