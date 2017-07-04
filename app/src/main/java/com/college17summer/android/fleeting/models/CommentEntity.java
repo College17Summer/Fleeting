@@ -1,5 +1,7 @@
 package com.college17summer.android.fleeting.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 /**
@@ -8,9 +10,13 @@ import java.util.Date;
 
 public class CommentEntity {
 
+    @SerializedName("id")
     private long mId;
+    @SerializedName("content")
     private String mContent;
+    @SerializedName("ip")
     private String mIp;
+    @SerializedName("time")
     private Date mTime;
 
     public CommentEntity() {

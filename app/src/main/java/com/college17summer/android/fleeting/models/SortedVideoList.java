@@ -58,10 +58,10 @@ public class SortedVideoList {
             public void run() {
                 try {
                     result = getRes(url);
+                    videos = gson.fromJson(result, new TypeToken<ArrayList<VideoEntity>>(){}.getType());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                videos = gson.fromJson(result, new TypeToken<ArrayList<VideoEntity>>(){}.getType());
                 setVideos(videos);
             }
         }).start();

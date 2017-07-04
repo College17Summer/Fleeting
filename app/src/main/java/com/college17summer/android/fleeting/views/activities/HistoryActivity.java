@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.college17summer.android.fleeting.R;
 import com.college17summer.android.fleeting.models.HistoryEntity;
+import com.college17summer.android.fleeting.models.UserEntity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +36,10 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
         getSupportActionBar().hide();
         init();
+
+
+        UserEntity userInstance = UserEntity.getUserInstance();
+        userInstance.netInstance();
     }
 
     private void init() {
