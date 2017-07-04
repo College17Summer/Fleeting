@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class VideoEntity {
+
     @SerializedName("id")
     private long mVideoId;
     @SerializedName("title")
@@ -89,4 +90,3 @@ public class VideoEntity {
     }
 
 }
-

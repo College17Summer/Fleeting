@@ -26,7 +26,6 @@ dependencies {
     })
     compile project(':vitamio2')
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
     compile 'com.jakewharton:butterknife:8.6.0'
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.4.3'
     compile 'com.android.support:recyclerview-v7:25.3.1'
