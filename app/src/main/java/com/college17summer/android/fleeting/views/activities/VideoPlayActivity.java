@@ -48,6 +48,8 @@ public class VideoPlayActivity extends AppCompatActivity implements MediaPlayer.
 //            return;
 //        }
         setContentView(R.layout.activity_video_play);
+
+        getSupportActionBar().hide();
         initView();
         initData();
     }

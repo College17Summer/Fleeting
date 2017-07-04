@@ -21,12 +21,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.activities.LoginActivity" />
-        <activity android:name=".views.activities.VideoPlayActivity" />
-        <activity android:name=".views.activities.CollectionsActivity" />
-        <activity android:name=".views.activities.HistoryActivity" />
-        <activity android:name=".views.activities.CategoryActivity" />
-        <activity android:name=".views.activities.CommentsActivity"></activity>
+        <activity
+            android:name=".views.activities.LoginActivity">
+        </activity>
+        <activity
+            android:name=".views.activities.VideoPlayActivity">
+        </activity>
+        <activity
+            android:name=".views.activities.CollectionActivity"
+            android:label="@string/my_collection">
+        </activity>
+        <activity
+            android:name=".views.activities.HistoryActivity"
+            android:label="@string/my_history">
+        </activity>
+        <activity
+            android:name=".views.activities.CategoryActivity"
+            android:label="@string/my_category">
+        </activity>
+        <activity
+            android:name=".views.activities.CommentActivity"
+            android:label="@string/my_comment">
+        </activity>
     </application>
 
 </manifest>
