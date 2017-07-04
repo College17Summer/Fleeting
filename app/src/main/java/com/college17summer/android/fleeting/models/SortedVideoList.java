@@ -50,24 +50,25 @@ public class SortedVideoList {
     private void GenSortedVideoList(String videoType) {
         new Thread(new Runnable() {
             // TODO: Add all urls to a static file
-            String url = "http://10.0.2.2:5000/fleeting/api/v1.0/sortedlist/" + getVideoType();
-            String result = "Fail";
-            List<VideoEntity> videos = new ArrayList<>();
+            String url = "http://182.254.230.24:5000/fleeting/api/v1.0/sortedlist/" + getVideoType();
+            String result = "[{id: 0 , cover: error}]";
+            List<VideoEntity> videos = new ArrayList<VideoEntity>();
 
             @Override
             public void run() {
                 try {
                     result = getRes(url);
+                    videos = gson.fromJson(result, new TypeToken<ArrayList<VideoEntity>>(){}.getType());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                videos = gson.fromJson(result, new TypeToken<ArrayList<VideoEntity>>(){}.getType());
                 setVideos(videos);
             }
         }).start();
     }
 
     public void setVideos(List<VideoEntity> videos) {
+        this.videoEntities.clear();
         this.videoEntities.addAll(videos);
     }
 

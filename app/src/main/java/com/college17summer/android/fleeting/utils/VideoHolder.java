@@ -19,9 +19,8 @@ public class VideoHolder extends RecyclerView.ViewHolder {
 
     public SimpleDraweeView mVideoCover;
     public TextView mVideoTitle;
-    public TextView mVideoDescription;
     public TextView mVideoType;
-    public TextView mVideoDuration;
+    public TextView mVideoSize;
     public ImageButton mVideoPlayButton;
 
 
@@ -30,5 +29,7 @@ public class VideoHolder extends RecyclerView.ViewHolder {
         mVideoCover = (SimpleDraweeView) itemView.findViewById(R.id.recommend_video_cover);
         mVideoTitle = (TextView) itemView.findViewById(R.id.video_title);
         mVideoPlayButton = (ImageButton) itemView.findViewById(R.id.video_button);
+        mVideoSize = (TextView) itemView.findViewById(R.id.video_size);
+        mVideoType = (TextView) itemView.findViewById(R.id.video_type);
     }
 }

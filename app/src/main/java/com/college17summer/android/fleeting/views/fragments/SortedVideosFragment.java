@@ -15,7 +15,10 @@ import com.college17summer.android.fleeting.models.SortedVideoLabEntity;
 import com.college17summer.android.fleeting.models.VideoEntity;
 import com.college17summer.android.fleeting.models.RecommendVideoLabEntity;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.security.auth.login.LoginException;
 
 /**
  * Created by zgh on 17-6-19.
@@ -29,6 +32,7 @@ public class SortedVideosFragment extends Fragment {
     private VideoListAdapter adapter;
 
     public static SortedVideosFragment newInstance(String mKind) {
+        Log.e(TAG, "newInstance: " + mKind);
         SortedVideosFragment fragment = new SortedVideosFragment();
         Bundle args = new Bundle();
         args.putString(ARG_KIND, mKind);
@@ -63,7 +67,7 @@ public class SortedVideosFragment extends Fragment {
 
     // TODO: Implement concrete functions
     private void updateUI() {
-        List<VideoEntity> videoEntityList = SortedVideoLabEntity.get(getActivity()).getVideoList(this.mKind).getVideos();
+        List<VideoEntity> videoEntityList = SortedVideoLabEntity.get(getActivity()).getVideoList(getActivity(), this.mKind).getVideos();
         adapter = new VideoListAdapter(getContext(), videoEntityList);
         recyclerView.setAdapter(adapter);
     }

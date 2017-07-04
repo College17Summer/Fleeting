@@ -14,7 +14,8 @@ import com.college17summer.android.fleeting.views.fragments.SortedVideosFragment
 
 public class SortedTabsAdapter extends FragmentPagerAdapter{
     // Kinds of videos
-    private String[] tabs = new String[]{"anime", "joy", "movie"}; //, "joy", "movie","music","pool"
+    private String[] tabs = new String[]{"anime", "music", "joy"};
+    //, "joy", "movie","music","pool"
     private Context context;
 
     public SortedTabsAdapter(FragmentManager fm, Context context) {
