@@ -28,7 +28,8 @@ public class SortedFragment extends Fragment {
     private String mKind;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private static List<SortedVideosFragment> sortedVideosFragments = new ArrayList<SortedVideosFragment>(3);
+    private View result;
+    // private static List<SortedVideosFragment> sortedVideosFragments = new ArrayList<SortedVideosFragment>(3);
 
     //private RecyclerView recyclerView;
     private SortedTabsAdapter tabsAdapter;
@@ -40,11 +41,10 @@ public class SortedFragment extends Fragment {
     }
 
 
-    public static SortedFragment newInstance(String mKind) {
+    public static SortedFragment newInstance() {
         SortedFragment fragment;
         fragment = new SortedFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_KIND, mKind);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,9 +52,6 @@ public class SortedFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            this.mKind = getArguments().getString(ARG_KIND);
-        }
     }
 
 
@@ -64,11 +61,17 @@ public class SortedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View result =  inflater.inflate(R.layout.fragment_sorted, container, false);
+        result =  inflater.inflate(R.layout.fragment_sorted, container, false);
 
         init(result);
         updateUI();
         return result;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 
     private void init(View view) {

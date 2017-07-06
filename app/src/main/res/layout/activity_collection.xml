@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.college17summer.android.fleeting.views.activities.CollectionActivity">
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.v7.widget.RecyclerView
+        android:paddingTop="20dp"
         android:id="@+id/collections_video_list"
         android:name="com.summer.seventeenth.bartab.RecommendVideoFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/fragment_video_item" />
+        tools:listitem="@layout/item_collection" />
 
 </LinearLayout>

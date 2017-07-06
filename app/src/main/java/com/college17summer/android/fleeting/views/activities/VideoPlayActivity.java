@@ -35,23 +35,26 @@ public class VideoPlayActivity extends AppCompatActivity implements MediaPlayer.
     private String path;
     private String title;
     private String type;
-    private int id;
+    private long id;
     private Uri uri;
     private ProgressBar pb;
     private TextView downloadRateView, loadRateView;
     private CustomMediaController mCustomMediaController;
     private RelativeLayout videoPlayArea;
     private VideoView mVideoView;
-    private RecyclerView linkArea;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         Log.e(TAG, "onCreate: Video play");
 
+        this.id = getIntent().getLongExtra("videoId", 12345);
         this.path = getIntent().getStringExtra("videoUrl");
         this.title = getIntent().getStringExtra("videoTitle");
         this.type = getIntent().getStringExtra("videoType");
+
+        // TODO: Set video id
         // this.id = Integer.getInteger(getIntent().getStringExtra("videoId"));
 
         super.onCreate(savedInstanceState);
@@ -77,12 +80,12 @@ public class VideoPlayActivity extends AppCompatActivity implements MediaPlayer.
     private void initView() {
         mVideoView = (VideoView) findViewById(R.id.buffer);
         mCustomMediaController=new CustomMediaController(this,mVideoView,this);
-        mCustomMediaController.setVideoName("test");
+        mCustomMediaController.setVideoName(this.title);
+        mCustomMediaController.setVideoId(this.id);
         pb = (ProgressBar) findViewById(R.id.probar);
         downloadRateView = (TextView) findViewById(R.id.download_rate);
         loadRateView = (TextView) findViewById(R.id.load_rate);
         videoPlayArea = (RelativeLayout) findViewById(R.id.video_play_area);
-        linkArea = (RecyclerView) findViewById(R.id.link_area);
     }
 
     //初始化数据
@@ -101,12 +104,6 @@ public class VideoPlayActivity extends AppCompatActivity implements MediaPlayer.
                 mediaPlayer.setPlaybackSpeed(1.0f);
             }
         });
-
-        List<VideoEntity> videos = SortedVideoLabEntity.get(this).getVideoList(this, this.type).getVideos();
-        VideoListAdapter adapter = new VideoListAdapter(this, videos);
-        linkArea.setAdapter(adapter);
-
-
     }
 
     @Override

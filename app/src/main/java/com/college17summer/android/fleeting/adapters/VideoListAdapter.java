@@ -3,6 +3,7 @@ package com.college17summer.android.fleeting.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,6 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoHolder> {
     public VideoHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext.getApplicationContext())
                 .inflate(R.layout.fragment_video_item, parent, false);
-
         return new VideoHolder(view);
     }
 

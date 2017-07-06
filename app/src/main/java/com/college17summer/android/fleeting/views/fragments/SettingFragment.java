@@ -1,6 +1,8 @@
 package com.college17summer.android.fleeting.views.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -102,9 +104,11 @@ public class SettingFragment extends Fragment {
         // bind view login&register
         tvLogin = (TextView)v.findViewById(R.id.txt_log_out);
         if(UserEntity.getUserInstance().getmId() == 0) {
+            tvUserName.setText(R.string.not_login);
             tvLogin.setText(R.string.log_in);
         } else {
             tvLogin.setText(R.string.log_out);
+            tvUserName.setText(UserEntity.getUserInstance().getmUserName());
         }
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,8 +120,18 @@ public class SettingFragment extends Fragment {
                 } else {
                     // login out operation
                     UserEntity.getUserInstance().setmId(0);
-                    tvUserName.setText("UserName");
+                    UserEntity.getUserInstance().setmUserName("");
+                    // Clear username and log out
+                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("UserName", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear();
+                    editor.commit();
+                    UserEntity.getUserInstance().setmUserName("");
+                    UserEntity.getUserInstance().setmId(0);
+
+                    tvUserName.setText(R.string.not_login);
                     Toast.makeText(getActivity(), R.string.info_login_out, Toast.LENGTH_SHORT).show();
+                    tvLogin.setText(R.string.log_in);
                 }
 
             }
@@ -130,7 +144,6 @@ public class SettingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-
 
         init(view);
 

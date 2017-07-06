@@ -2,6 +2,8 @@ package com.college17summer.android.fleeting.models;
 
 import android.content.Context;
 
+import com.college17summer.android.fleeting.utils.ApiAddress;
+import com.college17summer.android.fleeting.utils.NetRes;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -50,15 +52,15 @@ public class SortedVideoList {
     private void GenSortedVideoList(String videoType) {
         new Thread(new Runnable() {
             // TODO: Add all urls to a static file
-            String url = "http://182.254.230.24:5000/fleeting/api/v1.0/sortedlist/" + getVideoType();
+            String url = ApiAddress.url_sorted_list + getVideoType();
             String result = "[{id: 0 , cover: error}]";
             List<VideoEntity> videos = new ArrayList<VideoEntity>();
 
             @Override
             public void run() {
                 try {
-                    result = getRes(url);
-                    videos = gson.fromJson(result, new TypeToken<ArrayList<VideoEntity>>(){}.getType());
+                    result = NetRes.getRes(url);
+                    videos = NetRes.getGson().fromJson(result, new TypeToken<ArrayList<VideoEntity>>(){}.getType());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -72,16 +74,20 @@ public class SortedVideoList {
         this.videoEntities.addAll(videos);
     }
 
-    // Get information from Internet
-    private final OkHttpClient client = new OkHttpClient();
-    private final Gson gson = new Gson();
-    public String getRes (String url) throws IOException {
-        Request request = new Request.Builder().url(url).build();
-        Response response = client.newCall(request).execute();
-        if (response.isSuccessful()) {
-            return response.body().string();
-        } else {
-            throw new IOException("Unexpected code " + response);
-        }
-    }
+
+    /*
+     // Get information from Internet
+     private final OkHttpClient client = new OkHttpClient();
+     private final Gson gson = new Gson();
+     public String getRes (String url) throws IOException {
+     Request request = new Request.Builder().url(url).build();
+     Response response = client.newCall(request).execute();
+     if (response.isSuccessful()) {
+     return response.body().string();
+     } else {
+     throw new IOException("Unexpected code " + response);
+     }
+     }
+     */
+
 }

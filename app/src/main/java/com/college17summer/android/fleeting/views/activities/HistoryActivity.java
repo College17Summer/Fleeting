@@ -37,7 +37,6 @@ public class HistoryActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         init();
 
-
         UserEntity userInstance = UserEntity.getUserInstance();
         userInstance.netInstance();
     }

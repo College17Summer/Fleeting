@@ -27,6 +27,7 @@ import javax.security.auth.login.LoginException;
 public class SortedVideosFragment extends Fragment {
     private static final String ARG_KIND = "mKind";
     private static final String TAG = "SortedVideos";
+
     private String mKind;
     private RecyclerView recyclerView;
     private VideoListAdapter adapter;
@@ -57,6 +58,7 @@ public class SortedVideosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.e(TAG, "onCreateView: Ok " + this.mKind);
         // Inflate the layout for this fragment
         View result =  inflater.inflate(R.layout.fragment_list_sorted, container, false);
         recyclerView = (RecyclerView) result.findViewById(R.id.sorted_video_list);

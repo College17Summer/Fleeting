@@ -4,7 +4,7 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="320dp"
+    android:layout_height="360dp"
     android:orientation="vertical"
     android:paddingBottom="10dp">
 
@@ -27,10 +27,11 @@
 
     <TextView
         android:id="@+id/video_title"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:fontFamily="serif"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:text="TiTle TiTle TiTle TiTle "
         android:textAlignment="center"
         android:textAllCaps="false"

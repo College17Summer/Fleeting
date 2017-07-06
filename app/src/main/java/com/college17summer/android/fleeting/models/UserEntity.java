@@ -1,19 +1,15 @@
 package com.college17summer.android.fleeting.models;
 
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import io.vov.vitamio.utils.Log;
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * Created by Moonkey on 2017/6/23.
@@ -37,17 +33,17 @@ public class UserEntity {
     @SerializedName("register_time")
     private Date mTime;
 
-    private List<CollectionEntity> mCollections;
+    private List<CollectionVideoLabEntity> mCollections;
     private List<CategoryEntity> mCategories;
     private List<HistoryEntity> mHistories;
 
     public UserEntity() {
         this.mId = 0;
-        this.mUserName = "UserName";
-        this.mPassword = "pw123456";
+        this.mUserName = "";
+        this.mPassword = "";
         this.mEmail = "123@example.com";
         this.mTime = new Date();
-        this.mCollections = new ArrayList<CollectionEntity>();
+        this.mCollections = new ArrayList<CollectionVideoLabEntity>();
         this.mCategories = new ArrayList<CategoryEntity>();
         this.mHistories = new ArrayList<HistoryEntity>();
     }
@@ -103,11 +99,11 @@ public class UserEntity {
         this.mTime = mTime;
     }
 
-    public List<CollectionEntity> getmCollections() {
+    public List<CollectionVideoLabEntity> getmCollections() {
         return mCollections;
     }
 
-    public void setmCollections(List<CollectionEntity> mCollections) {
+    public void setmCollections(List<CollectionVideoLabEntity> mCollections) {
         this.mCollections = mCollections;
     }
 
@@ -134,7 +130,7 @@ public class UserEntity {
         return userInstance;
     }
 
-    public void netInstance() {
+    public static void netInstance() {
 
         Log.d(TAG,"in net Instance");
         //创建okHttpClient对象
@@ -164,8 +160,5 @@ public class UserEntity {
 
         //Gson gson = new Gson();
         //UserEntity aUser = gson.fromJson(res,UserEntity.class);
-
-
-
     }
 }

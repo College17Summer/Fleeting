@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class SortedVideoLabEntity {
     // TODO: Complete this array
-    private static final String VideoTypeList[] = {"anime", "joy", "music"};
+    private static final String VideoTypeList[] = {"anime", "music", "joy", "game", "dance"};
 
     private static SortedVideoLabEntity sSortedVideoLabEntity;
     protected Map<String, SortedVideoList> sortedVideoLists = new HashMap<String, SortedVideoList>(9);
