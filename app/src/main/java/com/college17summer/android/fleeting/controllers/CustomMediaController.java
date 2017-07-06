@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
@@ -19,12 +20,23 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.college17summer.android.fleeting.R;
+import com.college17summer.android.fleeting.utils.ApiAddress;
+import com.college17summer.android.fleeting.utils.NetRes;
+
+import java.io.IOException;
 
 import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by zgh on 17-6-20.
@@ -35,11 +47,13 @@ public class CustomMediaController extends MediaController {
 
     private GestureDetector mGestureDetector;
     private ImageButton img_back;//返回按钮
+    private ImageButton img_collect;
     private TextView mFileName;//文件名
     private VideoView videoView;
     private Activity activity;
     private Context context;
     private String videoname;//视频名称
+    private long videoid;
     private int controllerWidth = 0;//设置mediaController高度为了使横屏时top显示在屏幕顶端
 
 
@@ -64,6 +78,53 @@ public class CustomMediaController extends MediaController {
             if (activity != null) {
                 activity.finish();
             }
+        }
+    };
+
+
+    // TODO: Fuction : collection
+    private View.OnClickListener collectListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            OkHttpClient client = new OkHttpClient();
+            FormBody.Builder formBuilder = new FormBody.Builder();
+            String username = getContext().getSharedPreferences("UserName", Activity.MODE_PRIVATE).getString("username", "");
+            if (username != "") {
+                formBuilder.add("username", username);
+                formBuilder.add("videoid", String.valueOf(videoid));
+            }
+            Request request = new Request.Builder().url(ApiAddress.url_collection_list).post(formBuilder.build()).build();
+            Call call = client.newCall(request);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, R.string.info_net_error, Toast.LENGTH_SHORT).show();
+                            Log.d("okhttp", "fail");
+                        }
+                    });
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    final String res = response.body().string();
+                    Log.d("okhttp", res);
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (res.equals("0\n")) {
+                                Toast.makeText(context, R.string.collect_success, Toast.LENGTH_SHORT).show();
+                            } else if (res.equals("1\n")) {
+                                Toast.makeText(context, R.string.collect_cancel_success, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, R.string.collect_fail, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            });
         }
     };
 
@@ -119,6 +180,7 @@ public class CustomMediaController extends MediaController {
         v.setMinimumHeight(controllerWidth);
         //获取控件
         img_back = (ImageButton) v.findViewById(getResources().getIdentifier("mediacontroller_top_back", "id", context.getPackageName()));
+        img_collect = (ImageButton) v.findViewById(getResources().getIdentifier("mediacontroller_collect", "id", context.getPackageName()));
         mFileName = (TextView) v.findViewById(getResources().getIdentifier("mediacontroller_filename", "id", context.getPackageName()));
         //缩放控件
         mIvScale = (ImageView) v.findViewById(getResources().getIdentifier("mediacontroller_scale", "id", context.getPackageName()));
@@ -137,6 +199,7 @@ public class CustomMediaController extends MediaController {
 
         //注册事件监听
         img_back.setOnClickListener(backListener);
+        img_collect.setOnClickListener(collectListener);
         mIvScale.setOnClickListener(scaleListener);
         return v;
     }
@@ -269,6 +332,16 @@ public class CustomMediaController extends MediaController {
             mFileName.setText(name);
         }
     }
+
+    /**
+     * 设置视频id
+     *
+     * @param videoid
+     */
+    public void setVideoId(long videoid) {
+        this.videoid = videoid;
+    }
+
 
     /**
      * 隐藏或显示

@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class SortedVideoLabEntity {
     // TODO: Complete this array
-    private static final String VideoTypeList[] = {"anime", "joy", "movie"};
+    private static final String VideoTypeList[] = {"anime", "music", "joy", "game", "dance"};
 
     private static SortedVideoLabEntity sSortedVideoLabEntity;
     protected Map<String, SortedVideoList> sortedVideoLists = new HashMap<String, SortedVideoList>(9);
@@ -20,8 +20,12 @@ public class SortedVideoLabEntity {
         return sSortedVideoLabEntity;
     }
 
-    public SortedVideoList getVideoList(String videoType) {
+    public SortedVideoList getVideoList(Context context, String videoType) {
         SortedVideoList sortedVideoList = this.sortedVideoLists.get(videoType);
+        if (sortedVideoList == null) {
+            sortedVideoList = new SortedVideoList(context, videoType);
+            this.sortedVideoLists.put(videoType, sortedVideoList);
+        }
         return sortedVideoList;
     }
 

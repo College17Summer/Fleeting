@@ -1,46 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
-
-    <ImageView
-        android:id="@+id/collection_cover"
-        android:layout_width="0dp"
+    android:layout_height="120dp"
+    android:paddingBottom="10dp">
+    <ImageButton
+        android:id="@+id/button_video_play"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_whitegray"
-        android:layout_weight="5"/>
-
+        android:background="@color/transparent"/>
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="7">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/collection_cover"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/bg_whitegray"
+            android:layout_weight="5" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <TextView
-                android:id="@+id/collection_video_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Video Name"/>
-        </LinearLayout>
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Other Info"/>
-        </LinearLayout>
+                android:layout_height="0dp"
+                android:layout_weight="3">
+
+                <TextView
+                    android:id="@+id/collection_video_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="serif"
+                    android:gravity="center"
+                    android:text="Video Name"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/collection_video_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="27dp"
+                    android:gravity="center"
+                    android:text="VideoType"
+                    android:textColor="@color/bg_black" />
+            </LinearLayout>
+    </LinearLayout>
+
+
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

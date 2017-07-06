@@ -1,5 +1,6 @@
 package com.college17summer.android.fleeting.views.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.util.Log;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.college17summer.android.fleeting.R;
+import com.college17summer.android.fleeting.models.UserEntity;
 import com.college17summer.android.fleeting.views.fragments.RecommendFragment;
 import com.college17summer.android.fleeting.views.fragments.SettingFragment;
 import com.college17summer.android.fleeting.views.fragments.SortedFragment;
@@ -45,6 +47,18 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     }
 
     private void init() {
+        if (getSharedPreferences("UserName", Activity.MODE_PRIVATE) != null) {
+            // Save user infomations
+            String userName = getSharedPreferences("UserName", Activity.MODE_PRIVATE).getString("username", "");
+            if (userName != "") {
+                UserEntity.getUserInstance().setmUserName(userName);
+                // TODO: Test
+                UserEntity.getUserInstance().setmId(1);
+                Log.e(TAG, "init: User name: " + userName);
+            }
+        } else {
+            Log.e(TAG, "init: No user name");
+        }
         bottomNav = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar_container);
 
         bottomNav
@@ -79,11 +93,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 }
                 transaction.replace(R.id.frame_main_window, recommendFragment);
                 Log.e(TAG, "Recommend Fragment: Success");
+                Log.e(TAG, "Recommend Fragment: UserId: " + UserEntity.getUserInstance().getmUserName());
                 break;
             case 1:
                 // TODO: Add sorted videos window
                 if (this.sortedFragment == null) {
-                    this.sortedFragment = SortedFragment.newInstance("anime");
+                    this.sortedFragment = SortedFragment.newInstance();
                 }
                 transaction.replace(R.id.frame_main_window, sortedFragment);
                 break;

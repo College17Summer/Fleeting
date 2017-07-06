@@ -3,6 +3,7 @@ package com.college17summer.android.fleeting.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,6 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoHolder> {
     public VideoHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext.getApplicationContext())
                 .inflate(R.layout.fragment_video_item, parent, false);
-
         return new VideoHolder(view);
     }
 
@@ -40,11 +40,16 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoHolder> {
         final VideoEntity videoEntity = videoEntityList.get(position);
         holder.mVideoCover.setImageURI(videoEntity.getmVideoCover());
         holder.mVideoTitle.setText(videoEntity.getmVideoTitle());
+        holder.mVideoType.setText(videoEntity.getmVideoType());
+        holder.mVideoSize.setText("" + videoEntity.getmVideoSize());
         holder.mVideoPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext.getApplicationContext(), VideoPlayActivity.class);
                 intent.putExtra("videoUrl", videoEntity.getmVideoUrl());
+                intent.putExtra("videoTitle", videoEntity.getmVideoTitle());
+                intent.putExtra("videoType", videoEntity.getmVideoType());
+                intent.putExtra("videoId", videoEntity.getmVideoId());
                 mContext.startActivity(intent);
             }
         });

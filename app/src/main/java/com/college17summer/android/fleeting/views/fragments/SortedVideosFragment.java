@@ -15,7 +15,10 @@ import com.college17summer.android.fleeting.models.SortedVideoLabEntity;
 import com.college17summer.android.fleeting.models.VideoEntity;
 import com.college17summer.android.fleeting.models.RecommendVideoLabEntity;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.security.auth.login.LoginException;
 
 /**
  * Created by zgh on 17-6-19.
@@ -24,11 +27,13 @@ import java.util.List;
 public class SortedVideosFragment extends Fragment {
     private static final String ARG_KIND = "mKind";
     private static final String TAG = "SortedVideos";
+
     private String mKind;
     private RecyclerView recyclerView;
     private VideoListAdapter adapter;
 
     public static SortedVideosFragment newInstance(String mKind) {
+        Log.e(TAG, "newInstance: " + mKind);
         SortedVideosFragment fragment = new SortedVideosFragment();
         Bundle args = new Bundle();
         args.putString(ARG_KIND, mKind);
@@ -53,6 +58,7 @@ public class SortedVideosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.e(TAG, "onCreateView: Ok " + this.mKind);
         // Inflate the layout for this fragment
         View result =  inflater.inflate(R.layout.fragment_list_sorted, container, false);
         recyclerView = (RecyclerView) result.findViewById(R.id.sorted_video_list);
@@ -63,7 +69,7 @@ public class SortedVideosFragment extends Fragment {
 
     // TODO: Implement concrete functions
     private void updateUI() {
-        List<VideoEntity> videoEntityList = SortedVideoLabEntity.get(getActivity()).getVideoList(this.mKind).getVideos();
+        List<VideoEntity> videoEntityList = SortedVideoLabEntity.get(getActivity()).getVideoList(getActivity(), this.mKind).getVideos();
         adapter = new VideoListAdapter(getContext(), videoEntityList);
         recyclerView.setAdapter(adapter);
     }
